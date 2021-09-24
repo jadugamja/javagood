@@ -99,7 +99,7 @@ public class NoticeController extends HttpServlet {
 						System.out.println("공지사항 등록 및 파일 업로드 실패 ");
 					}	
 				}				
-			} // 공지사항 등록 end
+			} // end of 등록
 			
 			// 전체 공지사항 조회 ------------------------------------------------------------------------
 			if ("SALL".equals(isudType)){
@@ -121,7 +121,7 @@ public class NoticeController extends HttpServlet {
 					out.println("location.href='/testYjs/notice?ISUD_TYPE=SALL'");
 					out.println("</script>");
 				}		
-			} // 전체 회원정보 조회 end
+			} // end of 전체 공지사항 조회
 			
 			// 공지사항 조회 : S U D ---------------------------------------------------------------------
 			if ("S".equals(isudType) || "U".equals(isudType)){
@@ -156,7 +156,7 @@ public class NoticeController extends HttpServlet {
         			else{
 					System.out.println("공지사항 번호가  없습니다. ");
 				}		
-			}
+			} // end of 공지사항 조회
 			
 			// 공지사항 수정 ------------------------------------------------------------------------------
 			if ("UOK".equals(isudType)){
@@ -194,7 +194,7 @@ public class NoticeController extends HttpServlet {
 					out.println("location.href='/testYjs/notice?ISUD_TYPE=SALL'");
 					out.println("</script>");
 				}
-			}			
+			} // end of 공지사항 수정
 			
 			// 공지사항 삭제 ------------------------------------------------------------------------------
 			if ("DOK".equals(isudType)){
