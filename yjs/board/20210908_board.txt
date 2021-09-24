@@ -1,0 +1,152 @@
+Model 2 + Web MVC 패턴
+
+0. data source
+
+Oracle 11g 2 Release
+jdbc : ojdbc6.jar : Context/WebContent/WEB-INF/lib/ojdbc6.jar 
+
+sid : orclJSY
+account : yjs00/yjs1234
+url : jdbc:oracle:thin:@localhost:1521:orclJSY
+jdbc driver : oracle.jdbc.driver.OracleDriver
+
+오라클 SID : Service Name 확인하기 
+---------------------------------
+DB_UNIQUE_NAME 이름 사용하기 
+
+콘솔에서 
+sqlplus / as sysdba 또는 sqlplus "/as sysdba"
+
+SQL> SELECT NAME, DB_UNIQUE_NAME FROM V$DATABASE;
+
+NAME               DB_UNIQUE_NAME
+------------------ ------------------------------------------------------------
+ORCLJSY            orclJSY
+
+SQL> SELECT INSTANCE FROM V$THREAD;
+
+INSTANCE
+--------------------------------------------------------------------------------
+orcljsy
+
+1. 게시판
+	1) 요구사항
+	BNUMBER		글 번호		: BD + XXXX 숫자 4개
+	BSUBJECT	글 제목		: 길이 100 제한
+	BWRITER		글쓴이		: 50
+	BCONTENTS	내용		: 2000자
+	BPW		게시글의 비밀번호	: 8자
+	BPHOTO		첨부된 이미지	: 사이즈 10mb
+
+	DELETEYN	삭제여부
+	INSERTDATE	등록날짜
+	UPDATEDATE	수정날짜
+
+	2) 테이블 설계
+	2-1) 테이블 이름	MVC_BOARD
+	
+	BNUM		VARCHAR2(20)	PRIMARY KEY
+	BSUBJECT	VARCHAR2(100)	NOT NULL
+	BWRITER		VARCHAR2(50)	NOT NULL
+	BCONTENTS	VARCHAR2(2000) 
+	BPW		VARCHAR2(8) 
+	BPHOTO		VARCHAR2(100)
+
+	DELETEYN	VARCHAR2(8)	NOT NULL
+	INSERTDATE	DATE
+	UPDATEDATE	DATE
+
+	2-2) 테이블 생성
+	CREATE TABLE MVC_BOARD(
+	 BNUM		VARCHAR2(20)	PRIMARY KEY
+	,BSUBJECT	VARCHAR2(100)	NOT NULL
+	,BWRITER		VARCHAR2(50)	NOT NULL
+	,BCONTENTS	VARCHAR2(2000) 
+	,BPW		VARCHAR2(8) 
+	,BPHOTO		VARCHAR2(100)
+	,DELETEYN	VARCHAR2(8)	NOT NULL
+	,INSERTDATE	DATE
+	,UPDATEDATE	DATE
+	);
+	
+	2-3) 인덱스 확인
+	-- SYS_C0011181
+	SELECT A.INDEX_NAME
+	      ,A.COLUMN_NAME
+	      ,A.TABLE_NAME
+	FROM ALL_IND_COLUMNS A
+	WHERE A.TABLE_NAME IN ('MVC_BOARD');
+
+	2-4)채번 확인
+	SELECT /*+ INDEX_DESC(A SYS_C0011181) */
+		NVL(MAX(A.BNUM), 0) + 1	MAXNUM
+	FROM	MVC_BOARD A;
+
+	3) 클래스 설계
+	a.b.c.com.common
+		ConnProperty
+		DateFormatUtil
+		CommonUtils
+		GetChabun
+		GetBoardMaxNum
+		FileUploadUtil
+		FileRename
+
+	a.b.c.com.yjs.board
+		BoardScr
+	a.b.c.com.yjs.board.controller
+		BoardController
+	a.b.c.com.yjs.board.service
+		BoardService
+			public ArrayList<BoardVO> boardSelectAll();
+			public ArrayList<BoardVO> boardSelect(BoardVO bvo);
+			public boolean boardInsert(BoardVO bvo);
+			public boolean boardUpdate(BoardVO bvo);
+			public boolean boardDelete(BoardVO bvo);
+		BoardServiceImpl
+			public ArrayList<BoardVO> boardSelectAll();
+			public ArrayList<BoardVO> boardSelect(BoardVO bvo);
+			public boolean boardInsert(BoardVO bvo);
+			public boolean boardUpdate(BoardVO bvo);
+			public boolean boardDelete(BoardVO bvo);
+
+	a.b.c.com.yjs.board.dao
+		BoardDAO
+			public ArrayList<BoardVO> boardSelectAll();
+			public ArrayList<BoardVO> boardSelect(BoardVO bvo);
+			public boolean boardInsert(BoardVO bvo);
+			public boolean boardUpdate(BoardVO bvo);
+			public boolean boardDelete(BoardVO bvo);
+		BoardDAOImpl
+			public ArrayList<BoardVO> boardSelectAll()
+			public ArrayList<BoardVO> boardSelect(BoardVO bvo)
+			public boolean boardInsert(BoardVO bvo);
+			public boolean boardUpdate(BoardVO bvo);
+			public boolean boardDelete(BoardVO bvo);
+
+	a.b.c.com.yjs.board.sql
+		BoardSqlMap
+			public String getBoardSelectAll(){}
+			public String getBoardSelect(){}
+			public String getBoardInsert(){}
+			public String getBoardUpdate(){}
+			public String getBoardDelete(){}
+	a.b.c.com.yjs.board.vo
+		BoardVO
+			private String bnum;
+			private String bsubject;
+			private String bwriter;
+			private String bcontents;
+			private String bpw;
+			private String bphoto;
+			private String deleteyn;
+			private String insertdate;
+			private String updatedate;
+View : JSP
+testYjs/WebContent/yjs/board/
+			     board.html
+			     boardSelectAll.jsp
+			     boardSelect.jsp
+			     boardInsert.jsp
+			     boardUpdate.jsp
+			     boardDelete.jsp

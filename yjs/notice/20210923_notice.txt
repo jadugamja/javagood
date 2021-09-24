@@ -1,0 +1,77 @@
+공지사항 :: Model2 + Web MVC 패턴
+=============================
+
+0. DataSource
+-------------
+데이터 베이스 : Oracle 11g 2 Release
+jdbc driver : ojdbc6.jar (location) testYjs/WebContent/WEB-INF/lib
+sid : orclJSY
+account : yjs00/yjs1234
+url : jdbc:oracle:thin:@localhost:1521:orclJSY
+jdbc driver NameSpace : oracle:jdbc:driver:OracleDriver
+
+1. 요구사항 (토대로 컬럼 생성)
+--------
+글번호	: NNUM			
+제목		: NSUBJECT		
+내용		: NMEMO		
+사진		: NPHOTO		
+
+삭제여부	: DELETEYN		
+입력일	: INSERTDATE	DATE
+수정일	: UPDATEDATE	DATE
+
+2. 테이블 설계
+?? 이름을 잘못...
+CREATE TABLE MVC_TABLE(
+	NNUM		VARCHAR2(20)	PRIMARY KEY
+   ,NSUBJECT	VARCHAR2(50)
+   ,NMEMO		VARCHAR2(2000)
+   ,NPHOTO		VARCHAR2(100)
+   ,DELETEYN	VARCHAR2(1)		NOT NULL
+   ,INSERTDATE	DATE
+   ,UPDATEDATE	DATE	
+);
+
+3. 클래스 설계
+
+a.b.c.com.yjs.notice
+					.controller
+	NoticeController
+					.service
+	NoticeService
+		public ArrayList<NoticeVO> noticeSelectAll();
+		public ArrayList<NoticeVO> noticeSelect(NoticeVO nvo);
+		public int noticeInsert(NoticeVO nvo);
+		public int noticeUpdate(NoticeVO nvo);
+		public int noticeDelete(NoticeVO nvo);
+	NoticeServiceImpl
+					.dao
+	NoticeDAO
+		public ArrayList<NoticeVO> noticeSelectAll();
+		public ArrayList<NoticeVO> noticeSelect(NoticeVO nvo);
+		public int noticeInsert(NoticeVO nvo);
+		public int noticeUpdate(NoticeVO nvo);
+		public int noticeDelete(NoticeVO nvo);
+	NoticeDAOImpl
+					.sql
+	NoticSqlMap
+		public static String getNoticeSelectAllQuery();
+		public static String getNoticeSelectQuery(NoticeVO nvo);
+		public static String getNoticeInsertQuery(NoticeVO nvo);
+		public static String getNoticeUpdateQuery(NoticeVO nvo);
+		public static String getNoticeDeleteQuery(NoticeVO nvo);
+					.vo
+	NoticeVO
+	
+a.b.c.com.common
+	GetNoticeMaxNum
+
+	
+view : jsp
+notice.html
+noticeSelectAll.jsp
+noticeSelect.jsp
+noticeInsert.jsp
+noticeUpdate.jsp
+noticeDelete.jsp
