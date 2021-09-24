@@ -46,13 +46,13 @@ public class NoticeController extends HttpServlet {
 			if ("I".equals(isudType)){
 				System.out.println("공지사항등록isudType >>> : " + isudType);
 				
-                boolean bool = request.getContentType().toLowerCase().startsWith("multipart/form-data");				
+                		boolean bool = request.getContentType().toLowerCase().startsWith("multipart/form-data");				
 				if (bool){
 					System.out.println("공지사항등록 파일업로드 루틴 :: bool >>> : " + bool);
 					
 					String filePaths = CommonUtils.NOTICE_IMG_UPLOAD_PATH;
-	                int size_limit = CommonUtils.NOTICE_IMG_FILE_SIZE;
-	                String  encode_type = CommonUtils.NOTICE_IMG_ENCODE;
+	                		int size_limit = CommonUtils.NOTICE_IMG_FILE_SIZE;
+	                		String  encode_type = CommonUtils.NOTICE_IMG_ENCODE;
 					
 					FileUploadUtil fu = new FileUploadUtil();					
 					boolean bFile = fu.fileUpload3(request, filePaths, size_limit, encode_type);
@@ -87,13 +87,15 @@ public class NoticeController extends HttpServlet {
 							request.setAttribute("nCnt", new Integer(nCnt));				
 							RequestDispatcher rd = request.getRequestDispatcher("/yjs/notice/noticeInsert.jsp");
 							rd.forward(request, response);						
-						}else{
+						}
+						else{
 							out.println("<script>");				
 							out.println("location.href='/testYjs/yjs/notice/notice.html'");
 							out.println("</script>");
 						}
 					
-					}else{
+					}
+					else{
 						System.out.println("공지사항 등록 및 파일 업로드 실패 ");
 					}	
 				}				
@@ -113,7 +115,8 @@ public class NoticeController extends HttpServlet {
 					RequestDispatcher rd= request.getRequestDispatcher("/yjs/notice/noticeSelectAll.jsp");
 					rd.forward(request, response);
 					
-				}else {
+				}
+				else {
 					out.println("<script>");					
 					out.println("location.href='/testYjs/notice?ISUD_TYPE=SALL'");
 					out.println("</script>");
@@ -143,14 +146,14 @@ public class NoticeController extends HttpServlet {
 						rd.forward(request, response);
 						
 					}
-          else {
+          				else {
 						out.println("<script>");
 						out.println("alert('글 조회 실패')");
 						out.println("location.href='/testYjs/notice?ISUD_TYPE=SALL'");
 						out.println("</script>");
 					}									
 				}
-        else{
+        			else{
 					System.out.println("공지사항 번호가  없습니다. ");
 				}		
 			}
@@ -184,7 +187,7 @@ public class NoticeController extends HttpServlet {
 					rd.forward(request, response);
 					
 				}
-        else {
+        			else {
 					System.out.println("글 수정 실패 !!!!");
 					out.println("<script>");	
 					out.println("alert('글 수정 실패')");
@@ -216,7 +219,7 @@ public class NoticeController extends HttpServlet {
 						rd.forward(request, response);
 						
 					}
-          else {
+          				else {
 						System.out.println("글 삭제 실패 !!!!");
 						out.println("<script>");	
 						out.println("alert('글 수정 실패')");
@@ -224,13 +227,13 @@ public class NoticeController extends HttpServlet {
 						out.println("</script>");
 					}
 				}
-        else{
+        			else {
 					System.out.println("공지사항 번호를 잘 넘기세요 !!!! ");
 				}	
-			}	
+			} // end of 공지사항 삭제	
 		}
-    else{
-			System.out.println("form 태그에서 hidden 타입의 ISUD_TYPE 잘 넘기세요 >>> : ");
+		else{
+		System.out.println("form 태그에서 hidden 타입의 ISUD_TYPE 잘 넘기세요 >>> : ");
 		}		
 	}
 
