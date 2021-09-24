@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="EUC-KR">
+	<title>hi_ya_ya</title>
+	<link rel="shortcut icon" href="#">
+</head>
+<body>
+	<div>
+		<!-- 사용자 입력 처리를 위한 태그  -->
+		<!-- action="Servlet Mapping Address" -->
+		<!-- "notice-reg" mapping address 받는 Servlet이 있어야 한다!! -->
+		<form action="notice-reg" method="post">
+		<script>console.log("form 시작");</script>
+			<div>
+				<!-- name(혹은 id)은 키워드가 되어 입력된 값을 전달하게 된당 -->
+				<label>제목  </label><input type="text" name="title">
+				<script>console.log("제목 입력");</script>
+			</div>
+			<div>
+				<label>내용  </label>
+				<!-- 더 많이 쓸 수 있음 -->
+				<textarea name="content"></textarea>
+				<script>console.log("내용 ㄱㄱㄱ");</script>
+			</div>
+			<div>
+				<input type="submit" value="등록" />
+				<script>console.log("보내주셈ㄱㄱ");</script>
+			</div>
+		</form>
+	</div>
+	<script>console.log("form 끝");</script>
+</body>
+</html>
