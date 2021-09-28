@@ -11,21 +11,21 @@ import a.b.c.com.common.ConnProperty;
 
 public class NoticeDAOImpl implements NoticeDAO {
 
-	// ÀüÃ¼ Á¶È¸
+	// ì „ì²´ ì¡°íšŒ
 	@Override
 	public ArrayList<BookVO> bookSelectAll() {
 		// TODO Auto-generated method stub
 		System.out.println("BookDAOImpl.bookSelectAll() >>> : ");
 		
-		Connection 			conn = null;
+		Connection 		conn = null;
 		PreparedStatement 	pstmt = null;
-		ResultSet 			rsRs = null;
+		ResultSet 		rsRs = null;
 		ArrayList<BookVO> 	aList = null;
 		try {			
 
 			conn = ConnProperty.getConnection();
 			pstmt = conn.prepareStatement(BookSqlMap.getBookSelectAllQuery());
-			System.out.println("ÀüÃ¼ Á¶È¸ >>> : \n"+ BookSqlMap.getBookSelectAllQuery());
+			System.out.println("ì „ì²´ ì¡°íšŒ >>> : \n"+ BookSqlMap.getBookSelectAllQuery());
   
 			rsRs = pstmt.executeQuery();
 			
@@ -55,7 +55,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 			ConnProperty.conClose(conn, pstmt, rsRs);
 		}
 		catch(Exception e) {
-			System.out.println("µðºñ¿¬µ¿¿¡ ¹®Á¦°¡ »ý°å½À´Ï´Ù. >>> : " + e);
+			System.out.println("ë””ë¹„ì—°ë™ì— ë¬¸ì œê°€ ìƒê²¼ìŠµë‹ˆë‹¤. >>> : " + e);
 		}
 		finally {
 			try {
@@ -68,7 +68,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 	
 	} // end of bookSelectAll()
 
-	// Á¶°Ç Á¶È¸
+	// ì¡°ê±´ ì¡°íšŒ
 	@Override
 	public ArrayList<BookVO> bookSelect(BookVO bvo) {
 		// TODO Auto-generated method stub
@@ -83,7 +83,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 
 			conn = ConnProperty.getConnection();
 			pstmt = conn.prepareStatement(BookSqlMap.getBookSelectQuery());
-			System.out.println("Á¶°Ç Á¶È¸ >>> : \n"+ BookSqlMap.getBookSelectQuery());
+			System.out.println("ì¡°ê±´ ì¡°íšŒ >>> : \n"+ BookSqlMap.getBookSelectQuery());
   
 			pstmt.setString(1, bvo.getBnum());
 			rsRs = pstmt.executeQuery();					
@@ -114,7 +114,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 			ConnProperty.conClose(conn, pstmt, rsRs);
 		}
 		catch(Exception e) {
-			System.out.println("µðºñ¿¬µ¿¿¡ ¹®Á¦°¡ »ý°å½À´Ï´Ù. >>> : " + e);
+			System.out.println("ë””ë¹„ì—°ë™ì— ë¬¸ì œê°€ ìƒê²¼ìŠµë‹ˆë‹¤. >>> : " + e);
 		}
 		finally {
 			try {
@@ -127,7 +127,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 	} // end of bookSelect(bvo)
 
 	
-	// µµ¼­ Á¤º¸ µî·Ï
+	// ë„ì„œ ì •ë³´ ë“±ë¡
 	@Override
 	public int bookInsert(BookVO bvo) {
 		// TODO Auto-generated method stub
@@ -142,7 +142,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 			System.out.println("conn.getAutoCommit() >>> : " + conn.getAutoCommit());
 			
 			pstmt = conn.prepareStatement(BookSqlMap.getBookInsertQuery());
-			System.out.println("ÀÔ·ÂÇÏ±â >>> : \n"+ BookSqlMap.getBookInsertQuery());
+			System.out.println("ìž…ë ¥í•˜ê¸° >>> : \n"+ BookSqlMap.getBookInsertQuery());
   			
 			pstmt.clearParameters();
 			pstmt.setString(1, bvo.getBnum());
@@ -156,12 +156,12 @@ public class NoticeDAOImpl implements NoticeDAO {
 			
 			nCnt = pstmt.executeUpdate();
 			if (!conn.getAutoCommit()) conn.commit();			
-			System.out.println("nCnt >>> : " + nCnt + " °Ç µî·ÏµÇ¾úÀ½ ");
+			System.out.println("nCnt >>> : " + nCnt + " ê±´ ë“±ë¡ë˜ì—ˆìŒ ");
 			
 			ConnProperty.conClose(conn, pstmt);
 		}
-		catch(Exception e) {
-			System.out.println("ÀÔ·Â µðºñ¿¬µ¿¿¡ ¹®Á¦°¡ »ý°å½À´Ï´Ù. >>> : " + e);
+		catch(Exception e) { 	
+			System.out.println("ìž…ë ¥ ë””ë¹„ì—°ë™ì— ë¬¸ì œê°€ ìƒê²¼ìŠµë‹ˆë‹¤. >>> : " + e);
 		}
 		finally {
 			try {
@@ -174,7 +174,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 		
 	} // end of bookInsert(bvo)
 
-	// µµ¼­ Á¤º¸ ¼öÁ¤
+	// ë„ì„œ ì •ë³´ ìˆ˜ì •
 	@Override
 	public int bookUpdate(BookVO bvo) {
 		// TODO Auto-generated method stub
@@ -190,7 +190,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 			System.out.println("conn.getAutoCommit() >>> : " + conn.getAutoCommit());
 			
 			pstmt = conn.prepareStatement(BookSqlMap.getBookUpdateQuery());
-			System.out.println("¼öÁ¤ÇÏ±â >>> : \n"+ BookSqlMap.getBookUpdateQuery());
+			System.out.println("ìˆ˜ì •í•˜ê¸° >>> : \n"+ BookSqlMap.getBookUpdateQuery());
   			
 			pstmt.clearParameters();
 			pstmt.setString(1, bvo.getBprice());
@@ -199,12 +199,12 @@ public class NoticeDAOImpl implements NoticeDAO {
 			
 			nCnt = pstmt.executeUpdate();			
 			if (!conn.getAutoCommit()) conn.commit();			
-			System.out.println("nCnt >>> : " + nCnt + " °Ç ¼öÁ¤µÇ¾úÀ½ ");
+			System.out.println("nCnt >>> : " + nCnt + " ê±´ ìˆ˜ì •ë˜ì—ˆìŒ ");
 			
 			ConnProperty.conClose(conn, pstmt);
 		}
 		catch(Exception e) {
-			System.out.println("¼öÁ¤ µðºñ¿¬µ¿¿¡ ¹®Á¦°¡ »ý°å½À´Ï´Ù. >>> : " + e);
+			System.out.println("ìˆ˜ì • ë””ë¹„ì—°ë™ì— ë¬¸ì œê°€ ìƒê²¼ìŠµë‹ˆë‹¤. >>> : " + e);
 		}
 		finally {
 			try {
@@ -217,7 +217,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 		
 	} // end of bookUpdate(bvo)
 
-	// µµ¼­ Á¤º¸ »èÁ¦
+	// ë„ì„œ ì •ë³´ ì‚­ì œ
 	@Override
 	public int bookDelete(BookVO bvo) {
 		// TODO Auto-generated method stub
@@ -233,19 +233,19 @@ public class NoticeDAOImpl implements NoticeDAO {
 			System.out.println("conn.getAutoCommit() >>> : " + conn.getAutoCommit());
 			
 			pstmt = conn.prepareStatement(BookSqlMap.getBookDeleteQuery());
-			System.out.println("»èÁ¦ÇÏ±â >>> : \n"+ BookSqlMap.getBookDeleteQuery());
+			System.out.println("ì‚­ì œí•˜ê¸° >>> : \n"+ BookSqlMap.getBookDeleteQuery());
   			
 			pstmt.clearParameters();		
 			pstmt.setString(1, bvo.getBnum());			
 			
 			nCnt = pstmt.executeUpdate();			
 			if (!conn.getAutoCommit()) conn.commit();			
-			System.out.println("nCnt >>> : " + nCnt + " °Ç »èÁ¦µÇ¾úÀ½ ");
+			System.out.println("nCnt >>> : " + nCnt + " ê±´ ì‚­ì œë˜ì—ˆìŒ ");
 			
 			ConnProperty.conClose(conn, pstmt);
 		}
 		catch(Exception e) {
-			System.out.println("»èÁ¦ µðºñ¿¬µ¿¿¡ ¹®Á¦°¡ »ý°å½À´Ï´Ù. >>> : " + e);
+			System.out.println("ì‚­ì œ ë””ë¹„ì—°ë™ì— ë¬¸ì œê°€ ìƒê²¼ìŠµë‹ˆë‹¤. >>> : " + e);
 		}
 		finally {
 			try {
