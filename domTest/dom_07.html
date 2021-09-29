@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>HTML 태그에 리스너 작성</title>
+	<script>
+		// 쓸 변수부터 생성!!!
+		var p;
+		var pp;
+		var ppp;
+		
+		function init() { // 문서가 완전히 로드되었을 때 호출
+			
+			p = document.getElementById("p");
+			p.onmouseover = over; // over() 함수를 onmouseover 리스너로 등록
+			p.onmouseout = out; // out() 함수를 onmouseout 리스너로 등록
+			
+			pp = document.getElementById("pp");
+			pp.addEventListener("mouseover", over); // 이벤트 리스너 등록
+			pp.addEventListener("mouseout", out); // 이벤트  리스너 등록
+					
+			ppp = document.getElementById("ppp");
+			ppp.onmouseover = function () { // 익명 함수
+				this.style.backgroundColor = "teal";
+			};
+			
+			ppp.addEventListener("mouseout",
+				function () { this.style.backgroundColor="LightYellow"; } // 익명 함수
+			);
+		}
+		
+		function over() {
+			p.style.backgroundColor="skyblue";
+			pp.style.backgroundColor="tomato";
+		}
+		
+		function out() {
+			p.style.backgroundColor="silver";
+			pp.style.backgroundColor="yellow";
+		}
+	</script>
+</head>
+<!-- body 태그 안에 함수 쓰는 것은 그닥 바람직하지 않다. -->
+<body onload="init()">
+	<h3>HTML 태그에 리스너 작성</h3>
+	<hr>
+	<p onmouseover="this.style.backgroundColor='orchid'"
+	   onmouseout="this.style.backgroundColor='white'">
+		마우스 올리면 orchid으로 변경!!!
+	</p>
+	
+	<h3>DOM 객체의 이벤트 리스너 프로퍼티에 함수 등록</h3>
+	<hr>
+	<p id="p">turn to ★skyblue★</p>
+	
+	<h3>addEventListener()를 이용한 리스너 등록</h3>
+	<hr>
+	<p id="pp">turn to ★tomato★</p>
+	
+	<h3>익명 함수로 이벤트 리스너 작성</h3>
+	<hr>
+	<p id="ppp">turn to ★teal★</p>
+</body>
+</html>

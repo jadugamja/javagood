@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>innerHTML 활용</title>
+	<script>
+		function change() {
+			var p = document.getElementById("firstP");
+			// innerHTML : XHTML에서 사용하던 property
+			p.innerHTML="<h2>♥우리 </h2>♥<img src='/testCss/img/hoshio-.gif'>♥ <h2>만두♥</h2>";
+		}
+	</script>
+</head>
+<body>
+	<h3> innerHTML 활용<br > 
+		: 아래 글자를 클릭하면 만두가 보입니다.(귀여움 주의!)</h3>
+	<hr>
+	<hr>
+	<!-- 
+		1. id -> javascript로 보내는 매개..변수(?!)
+		2. style="" 한 큐에 끝냄
+		3. font-size:36px (강사의 px, ?? 차이 강의)
+			HTML 언어는 영어가 기본이기 때문에 
+			영어 글꼴의 경우는 싱글 쿼테이션을 꼭 사용하지 않아도 되지만, 
+			한글 글꼴은 싱글 쿼테이션을 써서 인식시켜줘야!
+		   font-family:NotoSans
+		   color:green
+		   
+	 -->
+	<p id="firstP" style="font-size:36px;font-family:NotoSans;color:green" 
+		onclick="change()">!Click Here!<span style="color:black">☜☜☜☜☜☜☜☜</span>
+	</p>
+</body>
+</html>

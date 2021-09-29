@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>HTML DOM TREE</title>
+</head>
+<body>
+	<h3>DOM 객체 p의 property, style, EventListener</h3>
+	<hr>
+	<p id="firstP" style="color:blue; background:light-gray" onclick="this.style.color='teal'">
+		this is <span style="color:red">토마토</span><br>
+		this is <span style="color:red">산타</span><br>
+		this is <span style="color:red">딸기</span><br>
+	</p>
+	<script>
+		var p = document.getElementById("firstP");
+		var text = "p.id = " + p.id + "\n";
+			text = "p.tagName = " + p.tagName + "\n";
+			text = "p.innerHTML = " + p.innerHTML + "\n";
+			text = "p.style.color = " + p.style.color + "\n";
+			text = "p.onclick = " + p.onclick + "\n";
+			text = "p.childElementCount = " + p.childElementCount + "\n";
+			text = "width = " + p.offsetWidth + "\n";
+			text = "height = " + p.offsetHeight + "\n";
+			
+		alert(text);
+	</script>
+</body>
+</html>

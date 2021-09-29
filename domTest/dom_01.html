@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="EUC-KR">
+	<title>CSS 스타일 동적 변경</title>
+
+	<script>
+		function change() {
+			var span = document.getElementById("mySpan"); // id가 mySpan인 객체 찾기
+			span.style.color = "black"; // 글자 색 green
+			span.style.fontSize = "45px"; // 글자 크기 45px
+			span.style.fontFamily = "Timeless"; // font
+			span.style.display = "block"; // 블록 박스로 변경
+			span.style.width = "20em"; // 박스의 폭. 글자 크기 20
+			span.style.border = "9px dotted white"; // 3픽셀 점선 magenta 테두리
+			span.style.margin = "20px"; // 상하좌우 여백 20px
+		}
+	</script>
+</head>
+<body>
+	<h3>CSS 스타일 동적 변경</h3>
+	<hr>
+	<p style="color:DarseaGreen" >yoyo<br>
+	    <span id="mySpan" style="color:black">This is a sentence.<br>
+	    									Let me show you what I got.<br>
+	    									Why Catalina keeps teasing me?<br>
+	    									Why me?</span>
+	</p>
+	<input type="button" value="스타일 바꾸기" onclick="change()">
+</body>
+</html>
